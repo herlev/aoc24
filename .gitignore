@@ -10,3 +10,5 @@ input*.txt
 # ocaml
 *.cmi
 *.cmo
+
+*.pdf
