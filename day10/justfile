@@ -1,0 +1,2 @@
+run:
+    julia day10.jl
