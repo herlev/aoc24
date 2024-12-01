@@ -1,1 +1,8 @@
 input*.txt
+
+# https://stackoverflow.com/a/25592735
+# Ignore all
+*
+!*.*
+!*/
+!justfile
