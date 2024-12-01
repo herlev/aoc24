@@ -1,0 +1,5 @@
+run:
+    gleam run
+
+test:
+    gleam test
