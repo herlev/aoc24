@@ -6,3 +6,7 @@ input*.txt
 !*.*
 !*/
 !justfile
+
+# ocaml
+*.cmi
+*.cmo
