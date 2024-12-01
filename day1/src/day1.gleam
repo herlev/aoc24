@@ -62,9 +62,19 @@ fn count_to_dict(l: List(Int)) -> dict.Dict(Int, Int) {
     n
     |> dict.get(d, _)
     |> result.unwrap(0)
-    |> fn(n) { n + 1 }
+    |> int.add(1)
     |> dict.insert(d, n, _)
   })
+}
+
+pub fn inspect(v: value) -> value {
+  io.debug(v)
+  v
+}
+
+fn list_to_tuple2(l: List(value)) -> #(value, value) {
+  let assert [left, right] = l
+  #(left, right)
 }
 
 pub fn part2(input: String) -> Int {
@@ -72,17 +82,12 @@ pub fn part2(input: String) -> Int {
     input
     |> string.split("\n")
 
-  let pairs =
+  let #(left, right) =
     lines
     |> list.map(string.split(_, " "))
     |> list.map(list.filter(_, not(_, string.is_empty)))
     |> list.map(list.map(_, unwrap(_, int.parse)))
-    |> list.map(fn(l) {
-      let assert [left, right] = l
-      #(left, right)
-    })
-  let #(left, right) =
-    pairs
+    |> list.map(list_to_tuple2)
     |> list.unzip
 
   let ld = count_to_dict(left)
@@ -114,13 +119,13 @@ fn u(result: Result(value, error)) -> value {
 }
 
 pub fn main() {
-  let test_input =
+  let _test_input =
     "3   4
-4   3
-2   5
-1   3
-3   9
-3   3"
+  4   3
+  2   5
+  1   3
+  3   9
+  3   3"
   let input =
     simplifile.read("input.txt")
     |> u
