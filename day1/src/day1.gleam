@@ -1,6 +1,9 @@
+import gleam/dict
 import gleam/int
 import gleam/io
 import gleam/list
+import gleam/result
+import gleam/set
 import gleam/string
 import simplifile
 
@@ -54,6 +57,55 @@ pub fn part1(input: String) -> Int {
   int.sum(differences)
 }
 
+fn count_to_dict(l: List(Int)) -> dict.Dict(Int, Int) {
+  list.fold(l, dict.new(), fn(d, n) {
+    n
+    |> dict.get(d, _)
+    |> result.unwrap(0)
+    |> fn(n) { n + 1 }
+    |> dict.insert(d, n, _)
+  })
+}
+
+pub fn part2(input: String) -> Int {
+  let lines =
+    input
+    |> string.split("\n")
+
+  let pairs =
+    lines
+    |> list.map(string.split(_, " "))
+    |> list.map(list.filter(_, not(_, string.is_empty)))
+    |> list.map(list.map(_, unwrap(_, int.parse)))
+    |> list.map(fn(l) {
+      let assert [left, right] = l
+      #(left, right)
+    })
+  let #(left, right) =
+    pairs
+    |> list.unzip
+
+  let ld = count_to_dict(left)
+  let rd = count_to_dict(right)
+
+  let common_numbers =
+    set.intersection(
+      ld
+        |> dict.keys
+        |> set.from_list,
+      rd
+        |> dict.keys
+        |> set.from_list,
+    )
+
+  let r =
+    common_numbers
+    |> set.to_list
+    |> list.map(fn(n) { n * u(dict.get(ld, n)) * u(dict.get(rd, n)) })
+    |> int.sum
+  r
+}
+
 fn u(result: Result(value, error)) -> value {
   case result {
     Ok(v) -> v
@@ -62,9 +114,17 @@ fn u(result: Result(value, error)) -> value {
 }
 
 pub fn main() {
+  let test_input =
+    "3   4
+4   3
+2   5
+1   3
+3   9
+3   3"
   let input =
     simplifile.read("input.txt")
     |> u
     |> string.trim
   io.debug(part1(input))
+  io.debug(part2(input))
 }
