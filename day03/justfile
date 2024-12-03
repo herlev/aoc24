@@ -1,5 +1,0 @@
-build:
-    ocamlc -o day3 day3.ml
-
-run: build
-    ./day3
