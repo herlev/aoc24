@@ -20,3 +20,7 @@ target/
 _build/
 
 input*.txt
+
+# c++
+.cache/
+build/
