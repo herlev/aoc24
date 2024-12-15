@@ -1,0 +1,12 @@
+[package]
+name = "day15"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+itertools = "0.13.0"
+rust-lib = {path = "../rust-lib"}
+
+[[bin]]
+name = "day15"
+path = "main.rs"
