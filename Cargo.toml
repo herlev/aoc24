@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+  "day15",
+  "rust-lib"
+]
