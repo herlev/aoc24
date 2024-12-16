@@ -36,6 +36,9 @@ impl<T: Eq> PriorityQueue<T> {
       data: BinaryHeap::new(),
     }
   }
+  pub fn len(&self) -> usize {
+    self.data.len()
+  }
   pub fn push(&mut self, (priority, e): (usize, T)) {
     self.data.push(QueueElement { priority, data: e })
   }

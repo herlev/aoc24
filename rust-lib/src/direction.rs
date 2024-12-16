@@ -1,6 +1,6 @@
 use crate::Point2;
 
-#[derive(Clone, Debug, Copy)]
+#[derive(Clone, Debug, Copy, Hash, PartialEq, Eq)]
 pub enum Direction {
   Up,
   Right,
@@ -36,6 +36,9 @@ impl DirectionDiag {
 }
 
 impl Direction {
+  pub fn all() -> impl Iterator<Item = Direction> {
+    [Direction::Up, Direction::Down, Direction::Right, Direction::Left].into_iter()
+  }
   pub fn to_point(&self) -> Point2<i32> {
     match self {
       Self::Up => Point2::new(0, 1),

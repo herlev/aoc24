@@ -59,3 +59,28 @@ impl<T: std::fmt::Display> fmt::Display for Point2<T> {
     write!(f, "({}, {})", self.x, self.y)
   }
 }
+
+impl<T: std::ops::Mul<Output = T> + Copy> std::ops::Mul<T> for Point2<T> {
+  type Output = Self;
+
+  fn mul(self, scalar: T) -> Self {
+    Self {
+      x: self.x * scalar,
+      y: self.y * scalar,
+    }
+  }
+}
+
+// impl<T> std::ops::Mul<Point2<T>> for T
+// where
+//   T: std::ops::Mul<Output = T> + Copy,
+// {
+//   type Output = Point2<T>;
+
+//   fn mul(self, point: Point2<T>) -> Point2<T> {
+//     Point2 {
+//       x: self * point.x,
+//       y: self * point.y,
+//     }
+//   }
+// }
