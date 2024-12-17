@@ -1,0 +1,17 @@
+B = A & 0b111
+B = B ^ 7
+C = A >> B
+B = B ^ C
+B = B ^ 4
+out B
+A = A >> 3
+if A!=0 goto start
+
+=>
+
+B = (((A & 0b111) ^ 7) ^ (A >> ((A & 0b111) ^ 7))) ^ 4
+out B
+A = A >> 3
+if A!=0 goto start
+
+2,4,1,7,7,5,4,1,1,4,5,5,0,3,3,0
