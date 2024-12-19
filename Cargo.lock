@@ -49,6 +49,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "day19"
+version = "0.1.0"
+dependencies = [
+ "itertools",
+ "rust-lib",
+]
+
+[[package]]
 name = "derive_more"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
